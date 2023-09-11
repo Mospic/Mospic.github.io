@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="Mospic"><meta name="renderer" content="webkit"><meta name="copyright" content="Mospic"><meta name="keywords" content="Mospic"><meta name="description" content=""><meta name="Cache-Control" content="no-cache"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Mospic's Blog</title><link rel="stylesheet" href="/css/style.css?v=2018.7.9"><link rel="stylesheet" href="/css/animation.css?v=2018.7.9"><link rel="icon" href="/img/assets/favicon.ico"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.6"><!-- scripts--><script>(function( w ){
+  "use strict";
+  // rel=preload support test
+  if( !w.loadCSS ){
+    w.loadCSS = function(){};
+  }
+  // define on the loadCSS obj
+  var rp = loadCSS.relpreload = {};
+  // rel=preload feature support test
+  // runs once and returns a function for compat purposes
+  rp.support = (function(){
+    var ret;
+    try {
+      ret = w.document.createElement( "link" ).relList.supports( "preload" );
+    } catch (e) {
+      ret = false;
+    }
+    return function(){
+      return ret;
+    };
+  })();
+
+  // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+  // then change that media back to its intended value on load
+  rp.bindMediaToggle = function( link ){
+    // remember existing media attr for ultimate state, or default to 'all'
+    var finalMedia = link.media || "all";
+
+    function enableStylesheet(){
+      link.media = finalMedia;
+    }
+
+    // bind load handlers to enable media
+    if( link.addEventListener ){
+      link.addEventListener( "load", enableStylesheet );
+    } else if( link.attachEvent ){
+      link.attachEvent( "onload", enableStylesheet );
+    }
+
+    // Set rel and non-applicable media type to start an async request
+    // note: timeout allows this to happen async to let rendering continue in IE
+    setTimeout(function(){
+      link.rel = "stylesheet";
+      link.media = "only x";
+    });
+    // also enable media after 3 seconds,
+    // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+    setTimeout( enableStylesheet, 3000 );
+  };
+
+  // loop through link elements in DOM
+  rp.poly = function(){
+    // double check this to prevent external calls from running
+    if( rp.support() ){
+      return;
+    }
+    var links = w.document.getElementsByTagName( "link" );
+    for( var i = 0; i < links.length; i++ ){
+      var link = links[ i ];
+      // qualify links to those with rel=preload and as=style attrs
+      if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+        // prevent rerunning on link
+        link.setAttribute( "data-loadcss", true );
+        // bind listeners to toggle media back
+        rp.bindMediaToggle( link );
+      }
+    }
+  };
+
+  // if unsupported, run the polyfill
+  if( !rp.support() ){
+    // run once at least
+    rp.poly();
+
+    // rerun poly on an interval until onload
+    var run = w.setInterval( rp.poly, 500 );
+    if( w.addEventListener ){
+      w.addEventListener( "load", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    } else if( w.attachEvent ){
+      w.attachEvent( "onload", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    }
+  }
+
+
+  // commonjs
+  if( typeof exports !== "undefined" ){
+    exports.loadCSS = loadCSS;
+  }
+  else {
+    w.loadCSS = loadCSS;
+  }
+}( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/venti.jpg"></div><!--.profile-saying
+  i.fa.fa-comment
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">Mospic</div><div class="profile-signature">这里是Mospic的小博客</div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">Mospic's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title"></h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2023-09-10</span></span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h1 id="2023-9-11"><a href="#2023-9-11" class="headerlink" title="2023.9.11"></a>2023.9.11</h1><h2 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h2><pre><code>① 简单处理部分已经将仓库下载到&#39;./github_projects&#39;中，1100个中爬取成功996个仓库，以&#39;usrname:reponame&#39;的形式存储，
+仓库存储大小在&#39;/DNNClone/github_projects_stat_data.json&#39;中，其余的为URL重复。
+② 核心内容部分提取出了模型定义代码，存储在DNNModel_Forest.json中，并将提取失败的py文件（不一定包含model）写入log中，目前暂时没标注树的深度。
+</code></pre>
+<h2 id="模型定义提取方法和问题（目前存在）"><a href="#模型定义提取方法和问题（目前存在）" class="headerlink" title="模型定义提取方法和问题（目前存在）"></a>模型定义提取方法和问题（目前存在）</h2><h3 id="提取方法："><a href="#提取方法：" class="headerlink" title="提取方法："></a>提取方法：</h3><p>目前使用的方法是，遍历Repo中的所有.py文件，对于所有在类声明中继承了<code>nn.module</code>和<code>torch.nn.module</code>以及声明了<code>from torch.nn import Module as xxx </code>且类中继承了<code>xxx</code>的class源码进行了提取，对于每个Repo中所有的符合要求的class类名与源码放入一个List中，最后每个Repo都会有一个键值对<code>RepoName:Extracted_Code_List</code>，所有键值对组合成一个大的字典<code>json.load</code>进文件中。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;RepoName&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="punctuation">&#123;</span></span><br><span class="line">                    &#x27;class_name&#x27;<span class="punctuation">:</span> node.name <span class="punctuation">,</span></span><br><span class="line">                    &#x27;class_code&#x27;<span class="punctuation">:</span> class_code</span><br><span class="line">               <span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    ...</span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os  </span><br><span class="line"><span class="keyword">import</span> pdb</span><br><span class="line"><span class="keyword">import</span> ast</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> chardet</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">source_code_translate</span>(<span class="params">source_code</span>):</span><br><span class="line">    match_Module = re.search(<span class="string">r&quot;from torch.nn import Module as \w+\n&quot;</span> , source_code)     <span class="comment">#Module</span></span><br><span class="line">    <span class="keyword">if</span> match_Module:</span><br><span class="line">        <span class="keyword">return</span> match_Module.group(<span class="number">0</span>)[<span class="number">31</span>:-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>: </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">extract_python_class</span>(<span class="params">source_code</span>):  </span><br><span class="line">    class_definitions = []</span><br><span class="line">    <span class="comment"># extract useless code comments and <span class="doctag">TODO:</span> find out the way define model </span></span><br><span class="line">    def_str = source_code_translate(source_code)</span><br><span class="line">    <span class="comment"># Parse the source code using ast.parse  </span></span><br><span class="line">    parsed_code = ast.parse(source_code)  </span><br><span class="line"></span><br><span class="line">    <span class="comment"># Traverse the AST and find the class node  </span></span><br><span class="line">    <span class="keyword">for</span> node <span class="keyword">in</span> ast.walk(parsed_code):  </span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(node, ast.ClassDef): </span><br><span class="line">            class_code = ast.unparse(node)</span><br><span class="line">            class_regex = <span class="string">r&quot;class\s+\w+\s*\((.*?)\):&quot;</span> </span><br><span class="line">            <span class="keyword">match</span> = re.search(class_regex, class_code) </span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">match</span> <span class="keyword">and</span> (<span class="keyword">match</span>.group(<span class="number">1</span>).find(<span class="string">&#x27;nn.Module&#x27;</span>) == <span class="number">0</span> <span class="keyword">or</span> <span class="keyword">match</span>.group(<span class="number">1</span>).find(<span class="string">&#x27;torch.nn.Module&#x27;</span>) == <span class="number">0</span> <span class="keyword">or</span> (def_str <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> <span class="keyword">match</span>.group(<span class="number">1</span>).find(def_str) == <span class="number">0</span>)):</span><br><span class="line">                class_definitions.append(</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="string">&#x27;class_name&#x27;</span>: node.name ,</span><br><span class="line">                        <span class="string">&#x27;class_code&#x27;</span>: class_code</span><br><span class="line">                    &#125;</span><br><span class="line">                )  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> class_definitions</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find_inherited_nn_modules</span>(<span class="params">root_folder</span>):  </span><br><span class="line">    inherited_modules = []  </span><br><span class="line">    <span class="keyword">for</span> folder, sub_folders, files <span class="keyword">in</span> os.walk(root_folder): </span><br><span class="line">        <span class="keyword">for</span> file <span class="keyword">in</span> files:  </span><br><span class="line">            <span class="keyword">if</span> file.endswith(<span class="string">&#x27;.py&#x27;</span>):  </span><br><span class="line">                <span class="keyword">with</span> <span class="built_in">open</span>(folder + <span class="string">&#x27;/&#x27;</span> + file, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:   </span><br><span class="line">                    encoding = chardet.detect(f.read())[<span class="string">&#x27;encoding&#x27;</span>]</span><br><span class="line">                <span class="keyword">with</span> <span class="built_in">open</span>(folder + <span class="string">&#x27;/&#x27;</span> + file, mode = <span class="string">&#x27;r&#x27;</span>, encoding =  <span class="string">&#x27;utf-8&#x27;</span> <span class="keyword">if</span>(encoding == <span class="literal">None</span> <span class="keyword">or</span> encoding.startswith(<span class="string">&#x27;Windows-&#x27;</span>)) <span class="keyword">else</span> encoding) <span class="keyword">as</span> f:</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        source_code = f.read()</span><br><span class="line">                        inherited_modules.extend(extract_python_class(source_code))</span><br><span class="line">                    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                        logging.error(<span class="string">&#x27;failed in parsing &#x27;</span> + folder + <span class="string">&#x27;/&#x27;</span> + file)</span><br><span class="line">                        logging.exception(e)</span><br><span class="line">    <span class="keyword">return</span> inherited_modules  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:  </span><br><span class="line"></span><br><span class="line">    logging.basicConfig(filename=<span class="string">&quot;DNNModel_forest.log&quot;</span>, filemode=<span class="string">&quot;w&quot;</span>, <span class="built_in">format</span>=<span class="string">&quot;%(asctime)s %(name)s:%(levelname)s:%(message)s&quot;</span>, datefmt=<span class="string">&quot;%d-%M-%Y %H:%M:%S&quot;</span>, level=logging.ERROR)</span><br><span class="line"></span><br><span class="line">    root_folder = <span class="string">&#x27;/bdata2/AISystemEvaluation/github_projects&#x27;</span>  <span class="comment"># 替换为你的Python源码文件夹路径 </span></span><br><span class="line">    Model_Forest = &#123;&#125;</span><br><span class="line">    ListofRepo = os.listdir(root_folder)</span><br><span class="line">    <span class="comment"># find_inherited_nn_modules(root_folder)</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> Repo <span class="keyword">in</span> ListofRepo:</span><br><span class="line">        Model_Forest[Repo] = find_inherited_nn_modules(root_folder + <span class="string">&#x27;/&#x27;</span> + Repo)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;DNNModel_forest.json&#x27;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">       json.dump(Model_Forest, f)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>编码格式问题：大部分代码源文件的编码格式都可以通过<code>chardet</code>库来分辨，但是有一部分以<code>Windows-</code>开头（如Windows-1252）的会无法分辨（<code>chardet</code>置信为0），统一使用<code>utf-8</code>来编码，测试了几个Windows-开头的小众国家都可以分辨。</p>
+</li>
+<li><p>提取关键字问题：目前提取的是继承了<code>nn.module</code>和<code>torch.nn.module</code>以及声明了<code>from torch.nn import Module as xxx </code>且类中继承了<code>xxx</code>的class源码，后面可以对<code>nn.module</code>和<code>torch.nn.module</code>考虑正则匹配声明？，以及存在一些比较特殊的情况，比如：</p>
+<ul>
+<li><pre><code class="Python">import pytorch_lightning as pl
+class ClassificationModel(pl.LightningModule):
+    def __init__():
+    def forward(self, x):
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ```Python</span><br><span class="line">  class ConvBNReLU(nn.Sequential):</span><br><span class="line">      def __init__(self, in_planes, out_planes, kernel_size=3, stride=1, groups=1):</span><br><span class="line">          padding = (kernel_size - 1) // 2</span><br><span class="line">          super(ConvBNReLU, self).__init__(</span><br><span class="line">              nn.Conv2d(in_planes, out_planes, kernel_size, stride, padding, groups=groups, bias=False),</span><br><span class="line">              nn.BatchNorm2d(out_planes),</span><br><span class="line">              nn.ReLU6(inplace=True)</span><br><span class="line">          )</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>树形问题：（目前还没做），可能考虑将List变换为树形，类似LeetCode那种List改Tree</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;RepoName&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">                    &#x27;class_name&#x27;<span class="punctuation">:</span> node.name <span class="punctuation">,</span></span><br><span class="line">                    &#x27;class_code&#x27;<span class="punctuation">:</span> class_code <span class="punctuation">,</span></span><br><span class="line">                    &#x27;inher_node&#x27;<span class="punctuation">:</span></span><br><span class="line">                    <span class="punctuation">&#123;</span></span><br><span class="line">                    	...</span><br><span class="line">                    <span class="punctuation">&#125;</span></span><br><span class="line">               <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    ...</span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BasicBlock</span>(<span class="title class_ inherited__">Module</span>):</span><br><span class="line">    expansion = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, inplanes, planes, stride=<span class="number">1</span>, downsample=<span class="literal">None</span>, use_se=<span class="literal">True</span>, anti_alias_layer=<span class="literal">None</span></span>):</span><br><span class="line">        self.se = SEModule(planes * self.expansion, reduce_layer_planes) <span class="keyword">if</span> use_se <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SEModule</span>(nn.Module):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, channels, reduction_channels, inplace=<span class="literal">True</span></span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>还需要提取的源码做什么东西？</p>
+<ul>
+<li>把实例的关系搞出来</li>
+</ul>
+</li>
+</ul>
+</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="https://mospic.github.io">Mospic</a></p><p> <span>Link:  </span><a href="https://mospic.github.io/2023/09/10/2023-9-11-meeting-about-DNN-Code-Extraction/">https://mospic.github.io/2023/09/10/2023-9-11-meeting-about-DNN-Code-Extraction/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/3.0">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><a class="nextSlogan" href="/2023/08/14/AI-security-supply-chain/" title="AI-security-supply-chain"><span>NextPost ></span><br><span class="nextTitle">AI-security-supply-chain</span></a><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span> | theme </span><a target="_blank" rel="noopener" href="https://github.com/Longlongyu/hexo-theme-Cxo"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2023-9-11"><span class="toc-number">1.</span> <span class="toc-text">2023.9.11</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.1.</span> <span class="toc-text">工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%E5%92%8C%E9%97%AE%E9%A2%98%EF%BC%88%E7%9B%AE%E5%89%8D%E5%AD%98%E5%9C%A8%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">模型定义提取方法和问题（目前存在）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">1.2.1.</span> <span class="toc-text">提取方法：</span></a></li></ol></li></ol></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>
